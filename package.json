@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node dist/index.js",
     "server": "nodemon --exec ts-node index.ts",
     "tsc": "tsc",
+    "postinstall": "tsc",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.9",
-    "node": "^15.2.1"
+    "node": "^12.16.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
