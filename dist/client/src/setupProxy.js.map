@@ -1,0 +1,1 @@
+{"version":3,"file":"setupProxy.js","sourceRoot":"","sources":["../../../client/src/setupProxy.js"],"names":[],"mappings":";AAAA,MAAM,EAAE,qBAAqB,EAAE,GAAG,OAAO,CAAC,uBAAuB,CAAC,CAAC;AAEnE,MAAM,CAAC,OAAO,GAAG,CAAC,GAAG,EAAE,EAAE;IAErB,GAAG,CAAC,GAAG,CAAC,qBAAqB,CAAC,SAAS,EAAE,EAAE,MAAM,EAAE,uBAAuB,EAAE,CAAC,CAAC,CAAC;AACnF,CAAC,CAAA"}

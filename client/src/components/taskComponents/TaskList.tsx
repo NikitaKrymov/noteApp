@@ -1,0 +1,118 @@
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { createTaskRequest, fetchTasksRequest } from '../../actions/taskActions';
+import FlexBox from '../../elements/FlexBox';
+import GridBox from '../../elements/GridBox';
+import ProgressBar from '../../elements/notebookElements/ProgressBar';
+import NewTaskButton from '../../elements/taskElements/NewTaskButton';
+import { AppState } from '../../reducers/rootReducer';
+import { NewTask, Task } from '../../types/interfaces';
+import TaskComponent from './Task';
+import TaskModal from './TaskCreateModal';
+
+
+const PROGRESS_BAR_ITEM = {
+    justifyContent: 'space-around',
+    alignItems: 'center',
+}
+
+const progressBarLoading = (totalSections: number, doneSections: number) => {
+    console.log(totalSections, doneSections);
+    const doneWidth = (100/totalSections) * doneSections;
+    console.log(doneWidth)
+    return(
+        {
+            backgroundColor: 'green',
+            width: `${doneWidth}%`
+        }
+    );
+}
+
+
+const countDoneTasks = (taskArray: Task[], setTotalDoneTasks: React.Dispatch<React.SetStateAction<number>>) => {
+    let count = 0;
+    taskArray.map((task, i) => {
+        return task.isDone ? count++ : count;
+    });
+    setTotalDoneTasks(count);
+}
+
+interface OwnProps {
+    notebookId: string
+}
+
+type Props = OwnProps & MapStateToProps & MapDispatchToProps;
+
+const TaskList: React.FC<Props> = (props) => {
+    const [taskForm, setTaskForm] = useState(false);
+    const [totalDoneTasks, setTotalDoneTasks] = useState(0);
+    console.log(props)
+    useEffect(() => {
+        console.log(totalDoneTasks);
+        props.fetchTasks(props.notebookId);
+    }, []);
+
+    useEffect(() => {
+        countDoneTasks(props.notebookTasks, setTotalDoneTasks);
+    }, [props.notebookTasks])
+
+    if (props.isTaskLoading) {
+        return (
+            <div>
+                Loading Data
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                {taskForm ? <TaskModal closeCreateTask={() => setTaskForm(false)} createTask={props.createTask} notebookId={props.notebookId} /> : null }
+                <GridBox style={{ gridTemplateColumns: '1fr 20fr 2fr', marginTop: '0.5em'}}>
+                    <FlexBox theme={PROGRESS_BAR_ITEM} >
+                        <i style={{ fontSize: '1.5em', borderRadius: '50%', color: props.notebookTasks.length === totalDoneTasks ? 'white' : 'black', border: props.notebookTasks.length === totalDoneTasks ? '1px solid green' : '0px solid black', backgroundColor: props.notebookTasks.length === totalDoneTasks ? 'green' : 'white' }} className="far fa-check-circle" />
+                    </FlexBox>
+                    <FlexBox theme={PROGRESS_BAR_ITEM}>
+                        <ProgressBar style={progressBarLoading(props.notebookTasks.length, totalDoneTasks)}/>
+                    </FlexBox>
+                    <FlexBox theme={PROGRESS_BAR_ITEM}>
+                        <NewTaskButton onClick={() => setTaskForm(true)}>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                +
+                            </div>
+                        </NewTaskButton>
+                    </FlexBox>
+                </GridBox>
+                {props.notebookTasks.map((task, i) => {
+                    return(
+                        <div key={task._id}>
+                            <TaskComponent task={task} number={i}/>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+}
+
+interface MapDispatchToProps {
+    fetchTasks: (notebookId: string) => void
+    createTask: (newTask: NewTask) => void,
+}
+
+interface MapStateToProps {
+    isTaskLoading: boolean
+    notebookTasks: Task[],
+}
+
+const mapStateToProps = (state: AppState): MapStateToProps => ({
+    notebookTasks: Object.values(state.app.notebookTasks),
+    isTaskLoading: state.app.isTaskLoading
+});
+
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => ({
+
+    createTask: (newTask) => dispatch(createTaskRequest(newTask)),
+    fetchTasks: (notebookId) => dispatch(fetchTasksRequest(notebookId)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
