@@ -13,8 +13,6 @@
     "build": "tsc --build",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
-    "heroku-preinstall": "",
-    "postinstall": "npm run build",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"

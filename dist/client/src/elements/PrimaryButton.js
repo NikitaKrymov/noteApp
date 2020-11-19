@@ -1,0 +1,13 @@
+"use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var styled_components_1 = __importDefault(require("styled-components"));
+exports.default = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    padding: 0.5em 2em 0.5em 2em;\n    color: ", ";\n    border: ", ";\n    border-radius: ", ";\n    background: ", ";\n    box-shadow: ", ";\n    font-size: 1.2em;\n    margin-top: ", ";\n    margin-right: ", ";\n    margin-left: ", ";\n    margin-bottom: ", ";\n    :hover {\n        color: ", ";\n        border: ", ";\n        background: ", ";\n        box-shadow: ", ";\n        border-radius: ", ";\n        cursor: pointer;\n    }\n"], ["\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    padding: 0.5em 2em 0.5em 2em;\n    color: ", ";\n    border: ", ";\n    border-radius: ", ";\n    background: ", ";\n    box-shadow: ", ";\n    font-size: 1.2em;\n    margin-top: ", ";\n    margin-right: ", ";\n    margin-left: ", ";\n    margin-bottom: ", ";\n    :hover {\n        color: ", ";\n        border: ", ";\n        background: ", ";\n        box-shadow: ", ";\n        border-radius: ", ";\n        cursor: pointer;\n    }\n"])), function (props) { return props.theme.color; }, function (props) { return props.theme.border; }, function (props) { return props.theme.borderRadius; }, function (props) { return props.theme.backgroundColor; }, function (props) { return props.theme.boxShadow; }, function (props) { return props.theme.marginTop; }, function (props) { return props.theme.marginRight; }, function (props) { return props.theme.marginLeft; }, function (props) { return props.theme.marginBottom; }, function (props) { return props.theme.hoverColor; }, function (props) { return props.theme.hoverBorder; }, function (props) { return props.theme.hoverBackgroundColor; }, function (props) { return props.theme.hoverBoxShadow; }, function (props) { return props.theme.hoverBorderRadius; });
+var templateObject_1;
+//# sourceMappingURL=PrimaryButton.js.map
