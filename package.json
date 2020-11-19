@@ -7,7 +7,6 @@
     "start": "node dist/index.js",
     "server": "nodemon --exec ts-node index.ts",
     "tsc": "tsc",
-    "postinstall": "tsc",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
