@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",
+  "name": "note_app",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -10,7 +10,6 @@
   "scripts": {
     "start": "node dist/index.js",
     "server": "nodemon --exec ts-node index.ts",
-    "build": "tsc",
     "watch-node": "nodemon dist/index.js",
     "watch-ts": "tsc -w",
     "client": "npm run start --prefix client",
