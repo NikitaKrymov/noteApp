@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import theme from "../theme";
 import history from '../history';
 import HeaderDiv from "../elements/headerElements/HeaderDiv";
-import NotebookCreateModal from "./notebookComponents/NorebookCreateModal";
+import NotebookCreateModal from "./notebookComponents/NotebookCreateModal";
 import HeaderButton from "../elements/headerElements/HeaderButton";
 import { NewNotebook } from "../types/interfaces";
 import { AppState } from "../reducers/rootReducer";
@@ -10,12 +10,8 @@ import { Dispatch } from "redux";
 import { createNotebookRequest } from "../actions/notebookActions";
 import { logoutUserRequest } from "../actions/authActions";
 import { connect } from "react-redux";
-
-const HEADER_BUTTON = {
-    color: theme.colors.white,
-    backgroundColor: theme.colors.navy,
-    border: '1px solid navy',
-}
+import FlexBox from "../elements/FlexBox";
+import '../css/main.css';
 
 interface OwnProps {
     authStatus: boolean
@@ -33,13 +29,17 @@ const Header: React.FC<Props> = (props) => {
     }, [props.authStatus])
     
     return(
-        <HeaderDiv>
+        <HeaderDiv className="appDiv">
             {createNotebook ? <NotebookCreateModal closeCreateNotebook={setCreateNotebook} createNotebook={props.createNotebook} userId={props.userId} /> : null}
-            <HeaderButton theme={HEADER_BUTTON} onClick={() => history.push('/')}>
-                Dashboard
+            <HeaderButton onClick={() => history.push('/')}>
+                <FlexBox theme={{ flexDirection: theme.flexDirection.row }}>
+                    <FlexBox theme={{ justifyContent: theme.justifyContent.flexStart, alignItems: theme.alignItems.center}}>
+                        Dashboard
+                    </FlexBox>
+                </FlexBox>
             </HeaderButton>
             <HeaderButton 
-                theme={HEADER_BUTTON} 
+             
                 style={{
                     opacity: props.authStatus ? '1' : '0'
                 }}
@@ -47,7 +47,7 @@ const Header: React.FC<Props> = (props) => {
             >
                 Open Notebook
             </HeaderButton>
-            <HeaderButton theme={HEADER_BUTTON} style={{ marginRight: '1em' }} onClick={() => props.authStatus ? props.logout() : null}>
+            <HeaderButton style={{ marginRight: '1em' }} onClick={() => props.authStatus ? props.logout() : null}>
                 {props.authStatus ? 'Log out' : 'Log In'}
             </HeaderButton>
         </HeaderDiv>

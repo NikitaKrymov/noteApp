@@ -1,3 +1,4 @@
+import { response } from 'express';
 import {  } from 'module';
 const Notebook = require('../../models/Notebook');
 const authorizeUser = require('../../middleware/authorizeUser');
@@ -42,7 +43,7 @@ module.exports = (app: any) => {
         }
     });
 
-    app.get('/api/fetchNotebook', authorizeUser, async(req: any, res: any) => {
+    app.get('/api/webPlanner/fetchNotebook', authorizeUser, async(req: any, res: any) => {
         const{ notebookId } = req.query;
 
         try {
@@ -74,5 +75,25 @@ module.exports = (app: any) => {
                 message: 'Unable to delete Notebook'
             })
         }
-    })
+    });
+
+    app.post('/api/webPlanner/editNotebook', authorizeUser, async(req: any, res: any) => {
+        console.log(req.body);
+        const { newTitle, newDescription, notebookId} = req.body;
+        console.log(notebookId);
+        try {
+            const existingNotebook = await Notebook.findOne({ _id: notebookId });
+            existingNotebook.title = newTitle,
+            existingNotebook.description = newDescription;
+            await existingNotebook.save();
+            res.send({
+                status: 1000
+            })
+        } catch {
+            res.send({
+                code: 609,
+                message: 'Unable to save notebook data'
+            })
+        }
+    });
 }

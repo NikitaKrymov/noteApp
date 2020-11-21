@@ -1,0 +1,36 @@
+.appDiv {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 30s ease infinite;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid grey;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    z-index: 110;
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 10px black;
+}
+
+@keyframes gradient {
+    0%{
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes spin{
+    0% { 
+        transform: rotate(0deg);
+    } 100% {
+        transform: rotate(360deg);
+    }
+}

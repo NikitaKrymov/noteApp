@@ -23,7 +23,7 @@ const CANCEL_BUTTON_THEME = {
     backgroundColor: theme.colors.white,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -36,7 +36,7 @@ const SUBMIT_BUTTON_THEME = {
     backgroundColor: 'red',
     hoverColor: 'red',
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px red',
+    hoverBoxShadow: '0 0 5px red',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -52,7 +52,7 @@ interface Props {
 const Modal: React.FC<Props> = (props) => {
     console.log(props.object)
     return(
-        <ModalDiv style={{ top: '20em', height: '10em', gridTemplateRows: '1fr 1fr' }}>
+        <ModalDiv style={{ height: '10em', gridTemplateRows: '1fr 1fr' }}>
             <FlexBox theme={TOP_FLEXBOX_THEME}>
                 Are you sure you want to delete this notebook?
             </FlexBox>

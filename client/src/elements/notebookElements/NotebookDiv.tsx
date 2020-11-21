@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    width: 70%;
+    margin-top: 3em;
     display: grid;
-    grid-template-rows: 2fr 20fr;
-    height: 85%;
-    position: fixed;
-    box-shadow: 0 0 3px black;
-    margin: 2em;
-    margin-bottom: 1em;
-    border-radius: 1em;
+    grid-template-rows: 1fr 5fr;
+    width: 60em;
+    height: 45em;
+    box-shadow: 0 0 10px black;
+    border-radius: 0.5em;
+    background: white;
+    overflow-y: 'hidden';
 `

@@ -14,15 +14,8 @@ import { deleteNotebookRequest, editNotebookRequest, fetchNotebookRequest } from
 import { AppState } from '../../reducers/rootReducer';
 import DeleteIcon from '../../elements/DeleteIcon';
 import Modal from '../notebookComponents/NotebookDeleteModal';
-
-const GRIDBOX_THEME = {
-    gridTemplateRows: '1fr 20fr',
-}
-
-const NOTEBOOK_FLEXBOX_THEME = {
-    justifyContent: theme.justifyContent.center,
-    alignItems: theme.alignItems.flexStart
-}
+import '../../css/main.css';
+import LoadingPage from '../../elements/LoadingPage';
 
 const TOP_FLEXBOX_THEME = {
     justifyContent: theme.justifyContent.sb
@@ -33,7 +26,8 @@ const TOP_FLEXBOX_STYLE = {
     width: '100%',
     marginTop: '1em',
     paddingBottom: '1em',
-    fontSize: '1.5em'
+    fontSize: '1.5em',
+    zIndex: 3
 }
 
 const TASKLIST_FLEXBOX_THEME = {
@@ -86,17 +80,27 @@ const NotebookComponent:React.FC <Props> = (props) => {
     console.log(props)
     if (props.isNotebookLoading) {
         return(
-            <div>
-                Loading
-            </div>
+            <LoadingPage>
+                <div className="spinner">
+
+                </div>
+            </LoadingPage>
         );
     } else {
         console.log(props.notebookData)
         return(
-            <GridBox theme={GRIDBOX_THEME}>
+            <FlexBox style={{ 
+                    position: 'relative',
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                    height: '100vh',
+                    width: '100%'
+
+                }} className="noScroll" >
                     {deleteModal ? <Modal closeModal={setDeleteModal} action={props.deleteNotebook} object={props.notebookData} /> : null }
                     {editMode ? <NotebookEditModal modalMame='Edit Notebook' closeModal={setEditMode} notebookId={props.notebookData._id} title={props.notebookData.title} userId={props.notebookData.owner} description={props.notebookData.description} saveNotebook={props.editNotebook} /> : null }
-                    <FlexBox theme={NOTEBOOK_FLEXBOX_THEME}>
+                        <FlexBox theme={{ justifyContent: theme.justifyContent.center}}>
                         <NotebookDiv>
                             <FlexBox theme={TOP_FLEXBOX_THEME} style={TOP_FLEXBOX_STYLE}>
                                 <FlexBox onClick={() => history.push('/')} theme={TOP_LEFT_FLEXBOX_THEME} style={{  cursor: 'pointer' }}>
@@ -123,14 +127,12 @@ const NotebookComponent:React.FC <Props> = (props) => {
                                     </DeleteIcon>
                                 </FlexBox>
                             </FlexBox>
-                            <FlexBox theme={TASKLIST_FLEXBOX_THEME} style={{ height: '95%', position: 'relative', overflow: 'auto', borderRadius: '1em', marginTop: '1em' }}>
-                                <div>
+                            <FlexBox theme={TASKLIST_FLEXBOX_THEME} style={{ padding: '1em', height: '85%', position: 'relative', overflow: 'scroll', borderRadius: '1em', marginTop: '1em'}}>
                                     <TaskList notebookId={props.notebookData._id }/>
-                                </div>
                             </FlexBox>
                         </NotebookDiv>
                     </FlexBox>
-            </GridBox>
+            </FlexBox>
         );
     }
 }
@@ -142,18 +144,18 @@ interface MapStateToProps {
 
 interface MapDispatchToProps {
     deleteNotebook: (notebook: Notebook) => void,
-    editNotebook: (notebookId: string, notebookData: NewNotebook) => void,
+    editNotebook: (title: string, description: string, notebookId: string) => void,
     fetchNotebook: (notebookId: string) => void
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => ({
     deleteNotebook: (notebook) => dispatch(deleteNotebookRequest(notebook)),
-    editNotebook: (notebookId, notebookData) => dispatch(editNotebookRequest(notebookId, notebookData)),
-    fetchNotebook: (notebookId) => dispatch(fetchNotebookRequest(notebookId)) 
+    editNotebook: (title, description, notebookId) => dispatch(editNotebookRequest(title, description, notebookId)),
+    fetchNotebook: (notebookId) => dispatch(fetchNotebookRequest(notebookId))
 })
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): MapStateToProps => ({
-    notebookData: state.app.userNotebooks[ownProps.match.params.id],
+    notebookData: state.app.currentNotebook,
     isNotebookLoading: state.app.isNotebookLoading
 })
 

@@ -9,6 +9,9 @@ export default styled.input`
     padding: 1em;
     font-size: 1.1em;
     border-bottom: 1px solid lightgrey;
+    background: none;
+    margin-right: 1em;
+    color: navy;
     :focus {
         border-bottom: 1px solid navy;
     }

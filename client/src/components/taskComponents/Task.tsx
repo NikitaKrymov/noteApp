@@ -4,12 +4,15 @@ import { Dispatch } from 'redux';
 import { deleteTaskRequest, finishTaskRequest, openTaskRequest } from '../../actions/taskActions';
 import DeleteIcon from '../../elements/DeleteIcon';
 import FlexBox from '../../elements/FlexBox';
+import GridBox from '../../elements/GridBox';
 import Icon from '../../elements/Icon';
 import Input from '../../elements/Input';
 import PrimaryButton from '../../elements/PrimaryButton';
 import CheckBox from '../../elements/taskElements/CheckBox';
 import TaskDiv from '../../elements/taskElements/TaskDiv';
 import TaskEditModeTrue from '../../elements/taskElements/TaskEditModeTrue';
+import Text from '../../elements/taskElements/Text';
+import TextArea from '../../elements/TextArea';
 import theme from '../../theme';
 import { Task } from '../../types/interfaces';
 import TaskDeleteModal from './TaskDeleteModal';
@@ -65,36 +68,44 @@ const TaskElement: React.FC<Props> = (props) => {
     if (editMode){
         return (
             <TaskEditModeTrue>
-                <FlexBox>
-                    <Input value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)} />
-                </FlexBox>
-                <PrimaryButton theme={CANCEL_BUTTON_THEME} onClick={() => setEditMode(false)} >Cancel</PrimaryButton>
-                <PrimaryButton theme={SUBMIT_BUTTON_THEME} onClick={() =>  { props.saveTask(props.task._id, taskSubject); setEditMode(false) } } >Save</PrimaryButton>
+                <GridBox style={{
+                    display: 'grid',
+                    gridTemplateColumns: '20fr 1fr 1fr',
+                    position: 'relative'
+                    }}>
+                    <TextArea value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)} />
+                    <PrimaryButton theme={CANCEL_BUTTON_THEME} onClick={() => setEditMode(false)} >Cancel</PrimaryButton>
+                    <PrimaryButton theme={SUBMIT_BUTTON_THEME} onClick={() =>  { props.saveTask(props.task._id, taskSubject); setEditMode(false) } } >Save</PrimaryButton>
+                </GridBox>
             </TaskEditModeTrue>
         );
     } else {
         return(
-            <div>
+            <div style={{ position: 'relative' }}>
             {confirmDeleteModal ? <TaskDeleteModal closeModal={setConfirmDeleteModal} action={props.deleteTask} object={props.task} /> : null }
-            <TaskDiv style={{ backgroundColor: props.task.isDone ? 'lightgreen' : 'white'}}>
-                <FlexBox theme={CHECKBOX_FLEXBOX_THEME}>
-                    <CheckBox type="checkbox" defaultChecked= {props.task.isDone ? true : false } onChange={(e) => { e.target.checked ? props.finishTask(props.task._id, props.task.notebook) : props.openTask(props.task._id, props.task.notebook) } }/>
-                </FlexBox>
-                <FlexBox theme={TEXT_FLEXBOX_THEME}>
-                    {props.number + 1}. 
-                    {props.task.subject}
-                </FlexBox>
-                <FlexBox theme={ACTION_FLEXBOX_THEME}>
-                    <Icon onClick={() => setEditMode(true)}>
-                        <i className="fas fa-pen" />
-                    </Icon>
-                </FlexBox>
-                <FlexBox theme={ACTION_FLEXBOX_THEME}>
-                    <DeleteIcon onClick={() => setConfirmDeleteModal(true)}>
-                        <i className="fas fa-trash-alt" />
-                    </DeleteIcon>
-                </FlexBox>
-            </TaskDiv>
+                <TaskDiv style={{ backgroundColor: props.task.isDone ? 'lightgreen' : 'white' }}>
+                    <GridBox style={{ position: 'relative', gridTemplateColumns: '1fr 1fr 19fr 1fr 1fr' }}>
+                        <FlexBox theme={CHECKBOX_FLEXBOX_THEME}>
+                            <CheckBox type="checkbox" defaultChecked= {props.task.isDone ? true : false } onChange={(e) => { e.target.checked ? props.finishTask(props.task._id, props.task.notebook) : props.openTask(props.task._id, props.task.notebook) } }/>
+                        </FlexBox>
+                        <FlexBox theme={TEXT_FLEXBOX_THEME}>
+                            {props.number + 1}. 
+                        </FlexBox>
+                        <Text>
+                            {props.task.subject}
+                        </Text>
+                        <FlexBox theme={ACTION_FLEXBOX_THEME}>
+                            <Icon onClick={() => setEditMode(true)}>
+                                <i className="fas fa-pen" />
+                            </Icon>
+                        </FlexBox>
+                        <FlexBox theme={ACTION_FLEXBOX_THEME}>
+                            <DeleteIcon onClick={() => setConfirmDeleteModal(true)}>
+                                <i className="fas fa-trash-alt" />
+                            </DeleteIcon>
+                        </FlexBox>
+                    </GridBox>
+                </TaskDiv>
             </div>
         );
     }

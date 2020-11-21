@@ -7,7 +7,7 @@ export default styled.div`
     padding: 0.5em 2em 0.5em 2em;
     color: ${props => props.theme.color};
     border: ${props => props.theme.border};
-    border-radius: ${props => props.theme.borderRadius};
+    border-radius: 0.8em;
     background: ${props => props.theme.backgroundColor};
     box-shadow: ${props => props.theme.boxShadow};
     font-size: 1.2em;
@@ -15,6 +15,7 @@ export default styled.div`
     margin-right: ${props => props.theme.marginRight};
     margin-left: ${props => props.theme.marginLeft};
     margin-bottom: ${props => props.theme.marginBottom};
+    z-index: 3;
     :hover {
         color: ${props => props.theme.hoverColor};
         border: ${props => props.theme.hoverBorder};

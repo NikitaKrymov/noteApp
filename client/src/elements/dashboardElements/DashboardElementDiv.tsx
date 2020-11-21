@@ -2,19 +2,28 @@ import styled from 'styled-components';
 
 export default styled.div`
     display: grid;
-    margin: 1em;
     width: 20em;
+    margin: 1em;
     height: 20em;
-    box-shadow: 0 0 3px black;
-    border-radius: 1em;
+    box-shadow: 0 0 5px black;
+    border-radius: 0.5em;
     grid-template-rows: 1fr 3fr 1fr;
     position: relative;
     transition: 0.2s;
-    text-align: left;
-    background-color: white;
     :hover {
-        transform: translateY(-0.5em);
+        transform: translateY(-0.2em);
         cursor: pointer;
-        box-shadow: 0 0 3px navy;
+        box-shadow: 0 0 10px navy;
+    }
+    background: inherit;
+    :after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0.5;
+        position: absolute;
+        border-radius: 0.5em;
+        z-index: 2;
     }
 `

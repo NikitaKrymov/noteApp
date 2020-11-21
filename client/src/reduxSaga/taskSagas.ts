@@ -4,9 +4,8 @@ import { CreateTaskRequest, DeleteTaskRequest, FetchTasksRequest, FinishTaskRequ
 import webPlannerApi from "../utils/webPlannerApi";
 
 export function* fetchTasks(action: FetchTasksRequest) {
-    const response = yield call(() => webPlannerApi.get(`/fetchTasks/${action.payload}`));
-    if (response.data.status === 1100) {
-        console.log(response.data.payload)
+    const response = yield call(() => webPlannerApi.get(`/fetchTasks/?notebookId=${action.payload}`));
+    if (response.data.status === 1000) {
         yield put(fetchTasksSuccess(response.data.payload));
     } else {
         yield put(fetchTasksFailed(response.data));
@@ -18,13 +17,10 @@ export function* createTask(action: CreateTaskRequest){
     if (response.data.status === 1500){
         yield put(fetchTasksRequest(action.payload.notebookId));
     } else {
-        console.log(response);
     }
 }
 
 export function* finishTask(action: FinishTaskRequest){
-    console.log('Finishing task', action.payload);
-    console.log(action.payload)
     const response = yield call(() => webPlannerApi.post('/finishTask', { taskId: action.payload.taskId }));
     if (response.data.status === 2000) {
         console.log(action.payload.notebookId)
@@ -33,7 +29,6 @@ export function* finishTask(action: FinishTaskRequest){
 }
 
 export function* openTask(action: OpenTaskRequest){
-    console.log("Opening task", action.payload);
     const response = yield call(() => webPlannerApi.post('/openTask', { taskId: action.payload.taskId }));
     if (response.data.status === 2100) {
         yield put(fetchTasksRequest(action.payload.notebookId));
@@ -53,7 +48,6 @@ export function* deleteTask(action: DeleteTaskRequest) {
     console.log(action.payload)
     const response = yield call(() => webPlannerApi.post('/deleteTask', { taskId: action.payload }));
     if (response.data.status === 1000) {
-        console.log(response.data);
         yield put(deleteTaskSuccess());
         yield put(fetchTasksRequest(action.payload.notebook));
     } else {

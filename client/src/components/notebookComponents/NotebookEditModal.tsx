@@ -42,7 +42,7 @@ const CANCEL_BUTTON_THEME = {
     backgroundColor: theme.colors.white,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -55,7 +55,7 @@ const SUBMIT_BUTTON_THEME = {
     backgroundColor: theme.colors.navy,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -74,7 +74,7 @@ interface Props {
     modalMame: string,
     title: string,
     description: string,
-    saveNotebook: (notebookId: string, notebookData: NewNotebook) => void
+    saveNotebook: (title: string, description: string, notebookId: string) => void
 }
 
 const NotebookCreateModal: React.FC<Props> = (props) => {
@@ -82,9 +82,9 @@ const NotebookCreateModal: React.FC<Props> = (props) => {
     const [description, setDescription] = useState(props.description);
     const [titleError, setTitleError] = useState(false); 
     const { notebookId } = props;
-    const { userId } = props;
+    console.log(notebookId)
     return(
-        <ModalDiv style={{ top: '20%', gridTemplateRows: '2fr 2fr 8fr 1fr' }}>
+        <ModalDiv style={{ gridTemplateRows: '2fr 2fr 8fr 1fr' }}>
             <FlexBox theme={TOP_FLEXBOX_THEME} style={{ color: 'navy', fontSize: '1.5em', borderBottom: '1px solid navy'}}>
                 {props.modalMame}
             </FlexBox>
@@ -97,7 +97,7 @@ const NotebookCreateModal: React.FC<Props> = (props) => {
             </FlexBox>
             <FlexBox theme={BOTTOM_FLEXBOX_THEME}>
                 <PrimaryButton theme={CANCEL_BUTTON_THEME} onClick={() => props.closeModal(false)} >Cancel</PrimaryButton>
-                <PrimaryButton theme={SUBMIT_BUTTON_THEME} onClick={() => { props.closeModal(false); title.length > 0 ? props.saveNotebook(notebookId, { title, description, owner: userId }) : setTitleError(true) } } >Save</PrimaryButton>
+                <PrimaryButton theme={SUBMIT_BUTTON_THEME} onClick={() => { props.closeModal(false); title.length > 0 ? props.saveNotebook(title, description, notebookId) : setTitleError(true) } } >Save</PrimaryButton>
             </FlexBox>
         </ModalDiv>
     );

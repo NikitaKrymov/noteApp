@@ -3,6 +3,7 @@ import FormInput from '../../elements/authElements/FormInput';
 import FlexBox from '../../elements/FlexBox';
 import ModalDiv from '../../elements/ModalDiv';
 import PrimaryButton from '../../elements/PrimaryButton';
+import TextArea from '../../elements/TextArea';
 import theme from '../../theme';
 import { NewTask } from '../../types/interfaces';
 
@@ -36,7 +37,7 @@ const CANCEL_BUTTON_THEME = {
     backgroundColor: theme.colors.white,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -49,7 +50,7 @@ const SUBMIT_BUTTON_THEME = {
     backgroundColor: theme.colors.navy,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -81,7 +82,7 @@ const TaskModal: React.FC<Props> = (props) => {
                 Subject field can not be empty! 
             </FlexBox>
             <FlexBox theme={MID_FLEXBOX_THEME}>
-                <FormInput type={FORM_FIELDS[0].type} placeholder={FORM_FIELDS[0].label} value={subject} onChange={(e) => setSubject(e.target.value)} style={{
+                <TextArea placeholder={FORM_FIELDS[0].label} value={subject} onChange={(e) => setSubject(e.target.value)} style={{
                     height: '100%',
                     border: '1px solid navy',
                     borderRadius: '1em'

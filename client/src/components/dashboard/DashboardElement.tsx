@@ -29,7 +29,7 @@ const BUTTON_THEME = {
     backgroundColor: theme.colors.navy,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em'
 }
 
@@ -42,10 +42,10 @@ const NotebookComponent: React.FC<Props> = (props) => {
         <DashboardElementDiv 
             onClick={() => history.push(`/${props.notebook._id}`)}
         >
-            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ fontSize: '1.5em', borderBottom: '1px solid navy' }}>
+            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ fontSize: '1.5em', borderBottom: '1px solid navy', zIndex: 3 }}>
                 {props.notebook.title}
             </FlexBox>
-            <FlexBox theme={MID_FLEXBOX_THEME}>
+            <FlexBox theme={MID_FLEXBOX_THEME} style={{ zIndex: 3 }}>
                 {props.notebook.description}
             </FlexBox>
             <FlexBox theme={BOTTOM_FLEXBOX_THEME}>

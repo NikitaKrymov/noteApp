@@ -5,23 +5,34 @@ import DashboardElement from './DashboardElement';
 
 import { AppState } from '../../reducers/rootReducer';
 import { Notebook } from '../../types/interfaces';
+import LoadingPage from '../../elements/LoadingPage';
+import '../../css/main.css';
+import FlexBox from '../../elements/FlexBox';
+import theme from '../../theme';
+
+const TASKLIST_FLEXBOX_THEME = {
+    justifyContent: theme.justifyContent.flexStart,
+    flexDirection: theme.flexDirection.row,
+    flexWrap: theme.flexWrap.wrap
+}
 
 type Props = MapStateToProps;
 
 const WebPlannerDashboard: React.FC<Props> = (props) => {
 
     if (props.isNotebookLoading){
-        console.log('was loading')
         return (
-            <div>
-                Loading
-            </div>
+            <LoadingPage>
+                <div className="spinner">
+
+                </div>
+            </LoadingPage>
         );       
     } else {
         console.log(props.notebooks)
         return(
             <DashboardDiv>
-                <div style={{ display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap', maxWidth: '66em'}} >
+                <FlexBox theme={TASKLIST_FLEXBOX_THEME} style={{ width: '66em' }}>
                     {props.notebooks.map((notebook, i) => {
                         return(
                             <DashboardElement 
@@ -30,7 +41,7 @@ const WebPlannerDashboard: React.FC<Props> = (props) => {
                             />
                         );
                     })}
-                </div>
+                </FlexBox>
             </DashboardDiv>
         );
     }

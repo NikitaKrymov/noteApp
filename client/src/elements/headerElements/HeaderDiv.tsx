@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export default styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    background: navy;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,5 +11,6 @@ export default styled.div`
     padding: 0.5em;
     color: white;
     padding-right: 1em;
-    z-index: 100;
+    z-index: 15;
+    box-shadow: 0 0 10px black;
 `

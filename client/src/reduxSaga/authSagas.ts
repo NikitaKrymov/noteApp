@@ -36,6 +36,7 @@ export function* authenticateUser(action: AuthenticateUserRequest){
             yield put(authenticateUserFailed(response.data));
         } else if (response.data.code === 1000) {
             yield put(authenticateUserSuccess(response.data.userData));
+            history.push('/');
             const state = yield select();
             yield put(fetchNotebooksRequest(state.app.userId));
         }
@@ -51,7 +52,6 @@ export function* registerUser(action: RegisterUserRequest) {
         yield put(registerUserFailed(authError));
     } else {
         const response = yield call(() => webPlannerApi.post('/createUser', { credentials: action.payload }));
-        console.log(response.data);
         if (response.data.code === 900) {
             yield put(registerUserSuccess());
             window.location.reload();
@@ -63,7 +63,6 @@ export function* registerUser(action: RegisterUserRequest) {
 
 export function* fetchCurrentUser(action: FetchUserRequest) {
     const response = yield call(() => webPlannerApi.get('/current_user'));
-    console.log(response);
     if (!response.data.code) {
         console.log(response)
         yield put(authenticateUserSuccess(response.data));
@@ -75,7 +74,6 @@ export function* fetchCurrentUser(action: FetchUserRequest) {
 
 export function* logoutUser(action: LogoutUserRequest) {
     const response = yield call(() => webPlannerApi.get('/logout'));
-    console.log(response);
     if (response.data.status === 1000) {
         yield put(logoutUserSuccess());
     } else {

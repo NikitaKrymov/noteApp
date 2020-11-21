@@ -51,7 +51,11 @@ export interface FetchNotebooksFailed {
 
 export interface EditNotebookRequest {
     type: typeof EDIT_NOTEBOOK_REQUEST,
-    payload: NewNotebook
+    payload: {
+        title: string,
+        description: string,
+        notebookId: string
+    }
 }
 
 export interface EditNotebookSuccess {
@@ -71,7 +75,7 @@ export interface FetchNotebookRequest {
 
 export interface FetchNotebookSuccess {
     type: typeof FETCH_NOTEBOOK_SUCCESS,
-    paylaod: Notebook
+    payload: Notebook
 }
 
 export interface FetchNotebookFailed {

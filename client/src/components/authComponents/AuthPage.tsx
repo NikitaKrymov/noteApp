@@ -5,6 +5,7 @@ import { authenticateUser, registerUser, validatePasswordsRequest, validateUsern
 import AuthPageDiv from '../../elements/authElements/AuthPageDiv';
 import FormDiv from '../../elements/authElements/FormDiv';
 import FormInput from '../../elements/authElements/FormInput';
+import BlurDiv from '../../elements/BlurDiv';
 import ErrorField from '../../elements/errorElements.tsx/ErrorField';
 import FlexBox from '../../elements/FlexBox';
 import GridBox from '../../elements/GridBox';
@@ -70,9 +71,10 @@ const BUTTON_THEME = {
     backgroundColor: theme.colors.navy,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em',
-    marginTop: '1em'
+    marginTop: '1em',
+    boxShadow: '1px 1px 5px black'
 }
 
 const GUEST_BUTTON_THEME = {
@@ -80,9 +82,10 @@ const GUEST_BUTTON_THEME = {
     backgroundColor: theme.colors.white,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em',
-    marginTop: '1em'
+    marginTop: '1em',
+    boxShadow: '1px 1px 5px black'
 }
 
 type Props = MapDispatchToProps & MapStateToProps;
@@ -103,7 +106,7 @@ const AuthPage: React.FC<Props> = (props) => {
         return(
             <AuthPageDiv>
                 <FormDiv>
-                    <FlexBox theme={LEFT_FLEXBOX_THEME} style={{ fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%' }}>
+                    <FlexBox theme={LEFT_FLEXBOX_THEME} style={{ fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%', zIndex: 3 }}>
                         Login
                     </FlexBox>
                     <GridBox theme={LOGIN_RIGHT_GRIDBOX_THEME}>
@@ -115,7 +118,7 @@ const AuthPage: React.FC<Props> = (props) => {
                                 <PrimaryButton theme={BUTTON_THEME}  onClick={() => props.authenticateUser({ username, password })} >Login</PrimaryButton>
                                 <PrimaryButton theme={GUEST_BUTTON_THEME} style={{ marginLeft: '1em' }}onClick={() => props.authenticateUser({ username: 'Guest', password: 'guest' })} >Login as Guest</PrimaryButton>
                             </FlexBox>
-                            <div style={{ marginTop: '1em'}}>
+                            <div style={{ marginTop: '1em', zIndex: 3, cursor: 'pointer' }}>
                                 Don't have an account? <a style={SWITCH_BUTTON_STYLE} onClick={() => setLogin(false)}>SignUp</a> now!
                             </div>
                         </FlexBox>
@@ -127,7 +130,7 @@ const AuthPage: React.FC<Props> = (props) => {
         return(
             <AuthPageDiv>
                 <FormDiv>
-                    <FlexBox theme={LEFT_FLEXBOX_THEME} style={{ fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%' }}>
+                    <FlexBox theme={LEFT_FLEXBOX_THEME} style={{ fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%', zIndex: 3 }}>
                         Sign Up
                     </FlexBox>
                     <GridBox theme={SIGNUP_RIGHT_GRIDBOX_THEME}>
@@ -137,7 +140,7 @@ const AuthPage: React.FC<Props> = (props) => {
                             <FormInput type={SIGNUP_FIELDS[1].type} value={password} placeholder={SIGNUP_FIELDS[1].label} onChange={(e) => setPassword(e.target.value)} />
                             <FormInput type={SIGNUP_FIELDS[2].type} value={confirmPassword} placeholder={SIGNUP_FIELDS[2].label} onChange={(e) => setConfirmPassword(e.target.value)} onBlur={() => props.error.length > 0 ? null : props.validatePasswords({ password, confirmPassword })} />
                             <PrimaryButton theme={BUTTON_THEME} onClick={() => props.error.length > 0 ? null : props.registerUser({ username, password, confirmPassword }) }>SignUp</PrimaryButton>
-                            <div style={{ marginTop: '1em'}}>
+                            <div style={{ marginTop: '1em', zIndex: 3, cursor: 'pointer' }}>
                                 Do you have an account? <a style={SWITCH_BUTTON_STYLE} onClick={() => setLogin(true) }>Log In</a> now!
                             </div>
                         </FlexBox>

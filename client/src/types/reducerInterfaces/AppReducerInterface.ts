@@ -1,4 +1,4 @@
-import { User } from '../interfaces';
+import { Notebook } from '../interfaces';
 
 export interface AppReducer {
     authStatus: boolean,
@@ -7,5 +7,6 @@ export interface AppReducer {
     notebookTasks: any,
     isTaskLoading: boolean,
     isNotebookLoading: boolean,
-    isUserLoading: boolean
+    isUserLoading: boolean,
+    currentNotebook: Notebook
 }

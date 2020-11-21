@@ -8,6 +8,8 @@ import { AppState } from '../reducers/rootReducer';
 import { createRoutes } from '../routes';
 import AuthPage from './authComponents/AuthPage';
 import Header from './Header';
+import '../css/main.css';
+import LoadingPage from '../elements/LoadingPage';
 
 const routes = createRoutes();
 
@@ -19,26 +21,32 @@ const App: React.FC<Props> = (props) => {
     })
     if(props.isLoading){
         return(
-            <div>
-                Loading
-            </div>
+            <LoadingPage>
+            <GlobalStyle />
+                <div className="spinner">
+
+                </div>
+            </LoadingPage>
         );
     } else {
         if (props.authStatus){
                 return(
-                    <GridBox theme={{ position: 'relative' }}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <GlobalStyle />
-                        <Header authStatus={props.authStatus}/>
-                        <div style={{ marginTop: '4em' }}>
-                            {routes}
-                        </div>
-                    </GridBox>
+                            <div style={{ position: 'relative', height: '3em' }}>
+                                <Header authStatus={props.authStatus}/>
+                            </div>
+                            <div style={{ position: 'relative' }}>
+                                {routes}
+                            </div>
+                    </div>
                 );
         } else {
             return(
-                <GridBox theme={{ position: 'fixed' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <GlobalStyle />
                     <AuthPage />
-                </GridBox>
+                </div>
             );
         }
     }

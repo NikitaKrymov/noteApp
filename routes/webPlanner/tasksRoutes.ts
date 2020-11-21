@@ -5,12 +5,13 @@ const authorizeUser = require('../../middleware/authorizeUser');
 
 
 module.exports = (app: any) => {
-    app.get('/api/webPlanner/fetchTasks/:notebookId', authorizeUser, async (req: any, res: any) => {
-        const { notebookId } = req.params;
+    app.get('/api/webPlanner/fetchTasks', authorizeUser, async (req: any, res: any) => {
+        const { notebookId } = req.query;
         try {
             const taskList = await Task.find({ notebook: notebookId });
+            console.log(taskList)
             res.send({
-                status: 1100,
+                status: 1000,
                 payload: taskList
             });
         } catch (e) {

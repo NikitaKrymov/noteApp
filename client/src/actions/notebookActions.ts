@@ -46,17 +46,17 @@ export const fetchNotebookFailed = (error: AppError) => ({
     payload: error
 });
 
-export const editNotebookRequest = (notebookId: string, notebookData: NewNotebook) => ({
+export const editNotebookRequest = ( title: string, description: string, notebookId: string) => ({
     type: EDIT_NOTEBOOK_REQUEST,
     payload: {
-        notebookId, 
-        notebookData
+        title, 
+        description,
+        notebookId
     }
 });
 
-export const editNotebookSuccess = (notebook: Notebook) => ({
-    type: EDIT_NOTEBOOK_SUCCESS,
-    payload: notebook
+export const editNotebookSuccess = () => ({
+    type: EDIT_NOTEBOOK_SUCCESS
 });
 
 export const editNotebookFailed = (error: AppError) => ({
