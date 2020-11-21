@@ -82,6 +82,12 @@ function rootSaga() {
                 return [4, effects_1.takeLatest(NotebookActionTypes_1.DELETE_NOTEBOOK_REQUEST, notebookSagas_1.deleteNotebook)];
             case 15:
                 _a.sent();
+                return [4, effects_1.takeLatest(NotebookActionTypes_1.FETCH_NOTEBOOK_REQUEST, notebookSagas_1.fetchNotebook)];
+            case 16:
+                _a.sent();
+                return [4, effects_1.takeLatest(NotebookActionTypes_1.EDIT_NOTEBOOK_REQUEST, notebookSagas_1.editNotebook)];
+            case 17:
+                _a.sent();
                 return [2];
         }
     });

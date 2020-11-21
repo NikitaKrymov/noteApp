@@ -26,27 +26,32 @@ var react_1 = __importStar(require("react"));
 var react_redux_1 = require("react-redux");
 var authActions_1 = require("../actions/authActions");
 var GlobalStyle_1 = __importDefault(require("../elements/GlobalStyle"));
-var GridBox_1 = __importDefault(require("../elements/GridBox"));
 var routes_1 = require("../routes");
 var AuthPage_1 = __importDefault(require("./authComponents/AuthPage"));
 var Header_1 = __importDefault(require("./Header"));
+require("../css/main.css");
+var LoadingPage_1 = __importDefault(require("../elements/LoadingPage"));
 var routes = routes_1.createRoutes();
 var App = function (props) {
     react_1.useEffect(function () {
         props.fetchUser();
     });
     if (props.isLoading) {
-        return (react_1.default.createElement("div", null, "Loading"));
+        return (react_1.default.createElement(LoadingPage_1.default, null,
+            react_1.default.createElement(GlobalStyle_1.default, null),
+            react_1.default.createElement("div", { className: "spinner" })));
     }
     else {
         if (props.authStatus) {
-            return (react_1.default.createElement(GridBox_1.default, { theme: { position: 'relative' } },
+            return (react_1.default.createElement("div", { style: { position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' } },
                 react_1.default.createElement(GlobalStyle_1.default, null),
-                react_1.default.createElement(Header_1.default, { authStatus: props.authStatus }),
-                react_1.default.createElement("div", { style: { marginTop: '4em' } }, routes)));
+                react_1.default.createElement("div", { style: { position: 'relative', height: '3em' } },
+                    react_1.default.createElement(Header_1.default, { authStatus: props.authStatus })),
+                react_1.default.createElement("div", { style: { position: 'relative' } }, routes)));
         }
         else {
-            return (react_1.default.createElement(GridBox_1.default, { theme: { position: 'fixed' } },
+            return (react_1.default.createElement("div", { style: { position: 'relative', width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' } },
+                react_1.default.createElement(GlobalStyle_1.default, null),
                 react_1.default.createElement(AuthPage_1.default, null)));
         }
     }

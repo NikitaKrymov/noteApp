@@ -38,11 +38,10 @@ function fetchTasks(action) {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.get("/fetchTasks/" + action.payload); })];
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.get("/fetchTasks/?notebookId=" + action.payload); })];
             case 1:
                 response = _a.sent();
-                if (!(response.data.status === 1100)) return [3, 3];
-                console.log(response.data.payload);
+                if (!(response.data.status === 1000)) return [3, 3];
                 return [4, effects_1.put(taskActions_1.fetchTasksSuccess(response.data.payload))];
             case 2:
                 _a.sent();
@@ -67,11 +66,8 @@ function createTask(action) {
                 return [4, effects_1.put(taskActions_1.fetchTasksRequest(action.payload.notebookId))];
             case 2:
                 _a.sent();
-                return [3, 4];
-            case 3:
-                console.log(response);
-                _a.label = 4;
-            case 4: return [2];
+                return [3, 3];
+            case 3: return [2];
         }
     });
 }
@@ -80,10 +76,7 @@ function finishTask(action) {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                console.log('Finishing task', action.payload);
-                console.log(action.payload);
-                return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/finishTask', { taskId: action.payload.taskId }); })];
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/finishTask', { taskId: action.payload.taskId }); })];
             case 1:
                 response = _a.sent();
                 if (!(response.data.status === 2000)) return [3, 3];
@@ -101,9 +94,7 @@ function openTask(action) {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                console.log("Opening task", action.payload);
-                return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/openTask', { taskId: action.payload.taskId }); })];
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/openTask', { taskId: action.payload.taskId }); })];
             case 1:
                 response = _a.sent();
                 if (!(response.data.status === 2100)) return [3, 3];
@@ -147,7 +138,6 @@ function deleteTask(action) {
             case 1:
                 response = _a.sent();
                 if (!(response.data.status === 1000)) return [3, 4];
-                console.log(response.data);
                 return [4, effects_1.put(taskActions_1.deleteTaskSuccess())];
             case 2:
                 _a.sent();

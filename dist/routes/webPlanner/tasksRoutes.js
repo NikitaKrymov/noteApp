@@ -39,20 +39,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Task = require('../../models/Task');
 var authorizeUser = require('../../middleware/authorizeUser');
 module.exports = function (app) {
-    app.get('/api/webPlanner/fetchTasks/:notebookId', authorizeUser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    app.get('/api/webPlanner/fetchTasks', authorizeUser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var notebookId, taskList, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    notebookId = req.params.notebookId;
+                    notebookId = req.query.notebookId;
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
                     return [4, Task.find({ notebook: notebookId })];
                 case 2:
                     taskList = _a.sent();
+                    console.log(taskList);
                     res.send({
-                        status: 1100,
+                        status: 1000,
                         payload: taskList
                     });
                     return [3, 4];

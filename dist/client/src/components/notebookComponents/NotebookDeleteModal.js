@@ -23,7 +23,7 @@ var CANCEL_BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.white,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -34,7 +34,7 @@ var SUBMIT_BUTTON_THEME = {
     backgroundColor: 'red',
     hoverColor: 'red',
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px red',
+    hoverBoxShadow: '0 0 5px red',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -42,7 +42,7 @@ var SUBMIT_BUTTON_THEME = {
 };
 var Modal = function (props) {
     console.log(props.object);
-    return (react_1.default.createElement(ModalDiv_1.default, { style: { top: '20em', height: '10em', gridTemplateRows: '1fr 1fr' } },
+    return (react_1.default.createElement(ModalDiv_1.default, { style: { height: '10em', gridTemplateRows: '1fr 1fr' } },
         react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME }, "Are you sure you want to delete this notebook?"),
         react_1.default.createElement(FlexBox_1.default, { theme: BOTTOM_FLEXBOX_THEME },
             react_1.default.createElement(PrimaryButton_1.default, { theme: CANCEL_BUTTON_THEME, onClick: function () { return props.closeModal(false); } }, "Cancel"),

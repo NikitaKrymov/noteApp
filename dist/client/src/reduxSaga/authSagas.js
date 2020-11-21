@@ -35,6 +35,7 @@ var effects_1 = require("redux-saga/effects");
 var webPlannerApi_1 = __importDefault(require("../utils/webPlannerApi"));
 var authActions_1 = require("../actions/authActions");
 var notebookActions_1 = require("../actions/notebookActions");
+var history_1 = __importDefault(require("../history"));
 function validateUsername(action) {
     var response;
     return __generator(this, function (_a) {
@@ -98,6 +99,7 @@ function authenticateUser(action) {
                 return [4, effects_1.put(authActions_1.authenticateUserSuccess(response.data.userData))];
             case 6:
                 _a.sent();
+                history_1.default.push('/');
                 return [4, effects_1.select()];
             case 7:
                 state = _a.sent();
@@ -127,7 +129,6 @@ function registerUser(action) {
             case 2: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/createUser', { credentials: action.payload }); })];
             case 3:
                 response = _a.sent();
-                console.log(response.data);
                 if (!(response.data.code === 900)) return [3, 5];
                 return [4, effects_1.put(authActions_1.registerUserSuccess())];
             case 4:
@@ -150,7 +151,6 @@ function fetchCurrentUser(action) {
             case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.get('/current_user'); })];
             case 1:
                 response = _a.sent();
-                console.log(response);
                 if (!!response.data.code) return [3, 4];
                 console.log(response);
                 return [4, effects_1.put(authActions_1.authenticateUserSuccess(response.data))];
@@ -176,7 +176,6 @@ function logoutUser(action) {
             case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.get('/logout'); })];
             case 1:
                 response = _a.sent();
-                console.log(response);
                 if (!(response.data.status === 1000)) return [3, 3];
                 return [4, effects_1.put(authActions_1.logoutUserSuccess())];
             case 2:

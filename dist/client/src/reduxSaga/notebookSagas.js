@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteNotebook = exports.fetchNotebook = exports.fetchNotebooks = exports.createNotebook = void 0;
+exports.editNotebook = exports.deleteNotebook = exports.fetchNotebook = exports.fetchNotebooks = exports.createNotebook = void 0;
 var effects_1 = require("redux-saga/effects");
 var webPlannerApi_1 = __importDefault(require("../utils/webPlannerApi"));
 var notebookActions_1 = require("../actions/notebookActions");
@@ -39,16 +39,14 @@ function createNotebook(action) {
     var response, state;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                console.log(action.payload.title);
-                return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/createNotebook', { newNotebook: action.payload }); })];
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/createNotebook', { newNotebook: action.payload }); })];
             case 1:
                 response = _a.sent();
                 if (!(response.data.code === 910)) return [3, 4];
-                console.log('Created successfully');
                 return [4, effects_1.select()];
             case 2:
                 state = _a.sent();
+                history_1.default.push('/');
                 return [4, effects_1.put(notebookActions_1.fetchNotebooksRequest(state.app.userId))];
             case 3:
                 _a.sent();
@@ -90,8 +88,16 @@ function fetchNotebook(action) {
             case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.get("/fetchNotebook?notebookId=" + action.payload); })];
             case 1:
                 response = _a.sent();
-                console.log(response);
-                return [2];
+                if (!(response.data.status === 1000)) return [3, 3];
+                return [4, effects_1.put(notebookActions_1.fetchNotebookSuccess(response.data.notebookData))];
+            case 2:
+                _a.sent();
+                return [3, 5];
+            case 3: return [4, effects_1.put(notebookActions_1.fetchNotebookFailed(response.data))];
+            case 4:
+                _a.sent();
+                _a.label = 5;
+            case 5: return [2];
         }
     });
 }
@@ -100,9 +106,7 @@ function deleteNotebook(action) {
     var response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                console.log('sending', action.payload);
-                return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/deleteNotebook', { notebookId: action.payload }); })];
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/deleteNotebook', { notebookId: action.payload }); })];
             case 1:
                 response = _a.sent();
                 if (!(response.data.status === 1000)) return [3, 4];
@@ -123,4 +127,28 @@ function deleteNotebook(action) {
     });
 }
 exports.deleteNotebook = deleteNotebook;
+function editNotebook(action) {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, effects_1.call(function () { return webPlannerApi_1.default.post('/editNotebook', { newTitle: action.payload.title, newDescription: action.payload.description, notebookId: action.payload.notebookId }); })];
+            case 1:
+                response = _a.sent();
+                if (!(response.data.status === 1000)) return [3, 4];
+                return [4, effects_1.put(notebookActions_1.editNotebookSuccess())];
+            case 2:
+                _a.sent();
+                return [4, effects_1.put(notebookActions_1.fetchNotebookRequest(action.payload.notebookId))];
+            case 3:
+                _a.sent();
+                return [3, 6];
+            case 4: return [4, effects_1.put(notebookActions_1.editNotebookFailed(response.data))];
+            case 5:
+                _a.sent();
+                _a.label = 6;
+            case 6: return [2];
+        }
+    });
+}
+exports.editNotebook = editNotebook;
 //# sourceMappingURL=notebookSagas.js.map

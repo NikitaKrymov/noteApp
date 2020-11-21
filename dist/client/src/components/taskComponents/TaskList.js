@@ -31,6 +31,8 @@ var ProgressBar_1 = __importDefault(require("../../elements/notebookElements/Pro
 var NewTaskButton_1 = __importDefault(require("../../elements/taskElements/NewTaskButton"));
 var Task_1 = __importDefault(require("./Task"));
 var TaskCreateModal_1 = __importDefault(require("./TaskCreateModal"));
+require("../../css/main.css");
+var theme_1 = __importDefault(require("../../theme"));
 var PROGRESS_BAR_ITEM = {
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -54,33 +56,26 @@ var countDoneTasks = function (taskArray, setTotalDoneTasks) {
 var TaskList = function (props) {
     var _a = react_1.useState(false), taskForm = _a[0], setTaskForm = _a[1];
     var _b = react_1.useState(0), totalDoneTasks = _b[0], setTotalDoneTasks = _b[1];
-    console.log(props);
     react_1.useEffect(function () {
-        console.log(totalDoneTasks);
         props.fetchTasks(props.notebookId);
     }, []);
     react_1.useEffect(function () {
         countDoneTasks(props.notebookTasks, setTotalDoneTasks);
     }, [props.notebookTasks]);
-    if (props.isTaskLoading) {
-        return (react_1.default.createElement("div", null, "Loading Data"));
-    }
-    else {
-        return (react_1.default.createElement("div", null,
-            taskForm ? react_1.default.createElement(TaskCreateModal_1.default, { closeCreateTask: function () { return setTaskForm(false); }, createTask: props.createTask, notebookId: props.notebookId }) : null,
-            react_1.default.createElement(GridBox_1.default, { style: { gridTemplateColumns: '1fr 20fr 2fr', marginTop: '0.5em' } },
-                react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM },
-                    react_1.default.createElement("i", { style: { fontSize: '1.5em', borderRadius: '50%', color: props.notebookTasks.length === totalDoneTasks ? 'white' : 'black', border: props.notebookTasks.length === totalDoneTasks ? '1px solid green' : '0px solid black', backgroundColor: props.notebookTasks.length === totalDoneTasks ? 'green' : 'white' }, className: "far fa-check-circle" })),
-                react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM },
-                    react_1.default.createElement(ProgressBar_1.default, { style: progressBarLoading(props.notebookTasks.length, totalDoneTasks) })),
-                react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM },
-                    react_1.default.createElement(NewTaskButton_1.default, { onClick: function () { return setTaskForm(true); } },
-                        react_1.default.createElement("div", { style: { display: 'flex', alignItems: 'center' } }, "+")))),
-            props.notebookTasks.map(function (task, i) {
-                return (react_1.default.createElement("div", { key: task._id },
-                    react_1.default.createElement(Task_1.default, { task: task, number: i })));
-            })));
-    }
+    return (react_1.default.createElement("div", null,
+        props.isTaskLoading ? react_1.default.createElement("div", { className: "spinner", style: { position: 'fixed', top: 'calc(50% - 15px)', left: 'calc(50% - 15px)' } }) : null,
+        taskForm ? react_1.default.createElement(TaskCreateModal_1.default, { closeCreateTask: function () { return setTaskForm(false); }, createTask: props.createTask, notebookId: props.notebookId }) : null,
+        react_1.default.createElement(GridBox_1.default, { style: { gridTemplateColumns: '1fr 20fr 2fr', marginTop: '0.5em' } },
+            react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM },
+                react_1.default.createElement("i", { style: { fontSize: '1.5em', borderRadius: '50%', color: props.notebookTasks.length === totalDoneTasks ? 'white' : 'black', border: props.notebookTasks.length === totalDoneTasks ? '1px solid green' : '0px solid black', backgroundColor: props.notebookTasks.length === totalDoneTasks ? 'green' : 'white' }, className: "far fa-check-circle" })),
+            react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM }, props.isTaskLoading ? null : react_1.default.createElement(ProgressBar_1.default, { style: progressBarLoading(props.notebookTasks.length, totalDoneTasks) })),
+            react_1.default.createElement(FlexBox_1.default, { theme: PROGRESS_BAR_ITEM },
+                react_1.default.createElement(NewTaskButton_1.default, { onClick: function () { return setTaskForm(true); } },
+                    react_1.default.createElement("div", { style: { display: 'flex', alignItems: 'center' } }, "+")))),
+        react_1.default.createElement(FlexBox_1.default, { theme: { justifyContent: theme_1.default.justifyContent.center, flexDirection: theme_1.default.flexDirection.column }, style: { position: 'relative', margin: '1em' } }, props.notebookTasks.map(function (task, i) {
+            return (react_1.default.createElement("div", { key: task._id, style: { position: 'relative' } },
+                react_1.default.createElement(Task_1.default, { task: task, number: i })));
+        }))));
 };
 var mapStateToProps = function (state) { return ({
     notebookTasks: Object.values(state.app.notebookTasks),

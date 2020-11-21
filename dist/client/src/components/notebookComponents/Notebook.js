@@ -35,13 +35,8 @@ var TaskList_1 = __importDefault(require("../taskComponents/TaskList"));
 var notebookActions_1 = require("../../actions/notebookActions");
 var DeleteIcon_1 = __importDefault(require("../../elements/DeleteIcon"));
 var NotebookDeleteModal_1 = __importDefault(require("../notebookComponents/NotebookDeleteModal"));
-var GRIDBOX_THEME = {
-    gridTemplateRows: '1fr 20fr',
-};
-var NOTEBOOK_FLEXBOX_THEME = {
-    justifyContent: theme_1.default.justifyContent.center,
-    alignItems: theme_1.default.alignItems.flexStart
-};
+require("../../css/main.css");
+var LoadingPage_1 = __importDefault(require("../../elements/LoadingPage"));
 var TOP_FLEXBOX_THEME = {
     justifyContent: theme_1.default.justifyContent.sb
 };
@@ -50,7 +45,8 @@ var TOP_FLEXBOX_STYLE = {
     width: '100%',
     marginTop: '1em',
     paddingBottom: '1em',
-    fontSize: '1.5em'
+    fontSize: '1.5em',
+    zIndex: 3
 };
 var TASKLIST_FLEXBOX_THEME = {
     justifyContent: theme_1.default.justifyContent.flexStart,
@@ -85,14 +81,22 @@ var NotebookComponent = function (props) {
     }, [props.match.params.id]);
     console.log(props);
     if (props.isNotebookLoading) {
-        return (react_1.default.createElement("div", null, "Loading"));
+        return (react_1.default.createElement(LoadingPage_1.default, null,
+            react_1.default.createElement("div", { className: "spinner" })));
     }
     else {
         console.log(props.notebookData);
-        return (react_1.default.createElement(GridBox_1.default, { theme: GRIDBOX_THEME },
+        return (react_1.default.createElement(FlexBox_1.default, { style: {
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                width: '100%'
+            }, className: "noScroll" },
             deleteModal ? react_1.default.createElement(NotebookDeleteModal_1.default, { closeModal: setDeleteModal, action: props.deleteNotebook, object: props.notebookData }) : null,
             editMode ? react_1.default.createElement(NotebookEditModal_1.default, { modalMame: 'Edit Notebook', closeModal: setEditMode, notebookId: props.notebookData._id, title: props.notebookData.title, userId: props.notebookData.owner, description: props.notebookData.description, saveNotebook: props.editNotebook }) : null,
-            react_1.default.createElement(FlexBox_1.default, { theme: NOTEBOOK_FLEXBOX_THEME },
+            react_1.default.createElement(FlexBox_1.default, { theme: { justifyContent: theme_1.default.justifyContent.center } },
                 react_1.default.createElement(NotebookDiv_1.default, null,
                     react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME, style: TOP_FLEXBOX_STYLE },
                         react_1.default.createElement(FlexBox_1.default, { onClick: function () { return history_1.default.push('/'); }, theme: TOP_LEFT_FLEXBOX_THEME, style: { cursor: 'pointer' } },
@@ -107,18 +111,17 @@ var NotebookComponent = function (props) {
                         react_1.default.createElement(FlexBox_1.default, { style: TOP_RIGHT_FLEXBOX_THEME, onClick: function (e) { setDeleteModal(true); } },
                             react_1.default.createElement(DeleteIcon_1.default, null,
                                 react_1.default.createElement("i", { className: "fas fa-trash-alt" })))),
-                    react_1.default.createElement(FlexBox_1.default, { theme: TASKLIST_FLEXBOX_THEME, style: { height: '95%', position: 'relative', overflow: 'auto', borderRadius: '1em', marginTop: '1em' } },
-                        react_1.default.createElement("div", null,
-                            react_1.default.createElement(TaskList_1.default, { notebookId: props.notebookData._id })))))));
+                    react_1.default.createElement(FlexBox_1.default, { theme: TASKLIST_FLEXBOX_THEME, style: { padding: '1em', height: '85%', position: 'relative', overflow: 'scroll', borderRadius: '1em', marginTop: '1em' } },
+                        react_1.default.createElement(TaskList_1.default, { notebookId: props.notebookData._id }))))));
     }
 };
 var mapDispatchToProps = function (dispatch) { return ({
     deleteNotebook: function (notebook) { return dispatch(notebookActions_1.deleteNotebookRequest(notebook)); },
-    editNotebook: function (notebookId, notebookData) { return dispatch(notebookActions_1.editNotebookRequest(notebookId, notebookData)); },
+    editNotebook: function (title, description, notebookId) { return dispatch(notebookActions_1.editNotebookRequest(title, description, notebookId)); },
     fetchNotebook: function (notebookId) { return dispatch(notebookActions_1.fetchNotebookRequest(notebookId)); }
 }); };
 var mapStateToProps = function (state, ownProps) { return ({
-    notebookData: state.app.userNotebooks[ownProps.match.params.id],
+    notebookData: state.app.currentNotebook,
     isNotebookLoading: state.app.isNotebookLoading
 }); };
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(NotebookComponent);

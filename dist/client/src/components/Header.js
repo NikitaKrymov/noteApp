@@ -26,16 +26,13 @@ var react_1 = __importStar(require("react"));
 var theme_1 = __importDefault(require("../theme"));
 var history_1 = __importDefault(require("../history"));
 var HeaderDiv_1 = __importDefault(require("../elements/headerElements/HeaderDiv"));
-var NorebookCreateModal_1 = __importDefault(require("./notebookComponents/NorebookCreateModal"));
+var NotebookCreateModal_1 = __importDefault(require("./notebookComponents/NotebookCreateModal"));
 var HeaderButton_1 = __importDefault(require("../elements/headerElements/HeaderButton"));
 var notebookActions_1 = require("../actions/notebookActions");
 var authActions_1 = require("../actions/authActions");
 var react_redux_1 = require("react-redux");
-var HEADER_BUTTON = {
-    color: theme_1.default.colors.white,
-    backgroundColor: theme_1.default.colors.navy,
-    border: '1px solid navy',
-};
+var FlexBox_1 = __importDefault(require("../elements/FlexBox"));
+require("../css/main.css");
 var Header = function (props) {
     var _a = react_1.useState(false), createNotebook = _a[0], setCreateNotebook = _a[1];
     react_1.useEffect(function () {
@@ -43,13 +40,15 @@ var Header = function (props) {
             history_1.default.push('/');
         }
     }, [props.authStatus]);
-    return (react_1.default.createElement(HeaderDiv_1.default, null,
-        createNotebook ? react_1.default.createElement(NorebookCreateModal_1.default, { closeCreateNotebook: setCreateNotebook, createNotebook: props.createNotebook, userId: props.userId }) : null,
-        react_1.default.createElement(HeaderButton_1.default, { theme: HEADER_BUTTON, onClick: function () { return history_1.default.push('/'); } }, "Dashboard"),
-        react_1.default.createElement(HeaderButton_1.default, { theme: HEADER_BUTTON, style: {
+    return (react_1.default.createElement(HeaderDiv_1.default, { className: "appDiv" },
+        createNotebook ? react_1.default.createElement(NotebookCreateModal_1.default, { closeCreateNotebook: setCreateNotebook, createNotebook: props.createNotebook, userId: props.userId }) : null,
+        react_1.default.createElement(HeaderButton_1.default, { onClick: function () { return history_1.default.push('/'); } },
+            react_1.default.createElement(FlexBox_1.default, { theme: { flexDirection: theme_1.default.flexDirection.row } },
+                react_1.default.createElement(FlexBox_1.default, { theme: { justifyContent: theme_1.default.justifyContent.flexStart, alignItems: theme_1.default.alignItems.center } }, "Dashboard"))),
+        react_1.default.createElement(HeaderButton_1.default, { style: {
                 opacity: props.authStatus ? '1' : '0'
             }, onClick: function () { return setCreateNotebook(!createNotebook); } }, "Open Notebook"),
-        react_1.default.createElement(HeaderButton_1.default, { theme: HEADER_BUTTON, style: { marginRight: '1em' }, onClick: function () { return props.authStatus ? props.logout() : null; } }, props.authStatus ? 'Log out' : 'Log In')));
+        react_1.default.createElement(HeaderButton_1.default, { style: { marginRight: '1em' }, onClick: function () { return props.authStatus ? props.logout() : null; } }, props.authStatus ? 'Log out' : 'Log In')));
 };
 var mapStateToProps = function (state) { return ({
     userId: state.app.userId,

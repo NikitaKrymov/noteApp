@@ -102,7 +102,7 @@ module.exports = function (app) {
             }
         });
     }); });
-    app.get('/api/fetchNotebook', authorizeUser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    app.get('/api/webPlanner/fetchNotebook', authorizeUser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var notebookId, notebookData, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -156,6 +156,40 @@ module.exports = function (app) {
                     });
                     return [3, 4];
                 case 4: return [2];
+            }
+        });
+    }); });
+    app.post('/api/webPlanner/editNotebook', authorizeUser, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var _a, newTitle, newDescription, notebookId, existingNotebook, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    console.log(req.body);
+                    _a = req.body, newTitle = _a.newTitle, newDescription = _a.newDescription, notebookId = _a.notebookId;
+                    console.log(notebookId);
+                    _c.label = 1;
+                case 1:
+                    _c.trys.push([1, 4, , 5]);
+                    return [4, Notebook.findOne({ _id: notebookId })];
+                case 2:
+                    existingNotebook = _c.sent();
+                    existingNotebook.title = newTitle,
+                        existingNotebook.description = newDescription;
+                    return [4, existingNotebook.save()];
+                case 3:
+                    _c.sent();
+                    res.send({
+                        status: 1000
+                    });
+                    return [3, 5];
+                case 4:
+                    _b = _c.sent();
+                    res.send({
+                        code: 609,
+                        message: 'Unable to save notebook data'
+                    });
+                    return [3, 5];
+                case 5: return [2];
             }
         });
     }); });

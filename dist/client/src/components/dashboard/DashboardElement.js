@@ -27,13 +27,13 @@ var BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.navy,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em'
 };
 var NotebookComponent = function (props) {
     return (react_1.default.createElement(DashboardElementDiv_1.default, { onClick: function () { return history_1.default.push("/" + props.notebook._id); } },
-        react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME, style: { fontSize: '1.5em', borderBottom: '1px solid navy' } }, props.notebook.title),
-        react_1.default.createElement(FlexBox_1.default, { theme: MID_FLEXBOX_THEME }, props.notebook.description),
+        react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME, style: { fontSize: '1.5em', borderBottom: '1px solid navy', zIndex: 3 } }, props.notebook.title),
+        react_1.default.createElement(FlexBox_1.default, { theme: MID_FLEXBOX_THEME, style: { zIndex: 3 } }, props.notebook.description),
         react_1.default.createElement(FlexBox_1.default, { theme: BOTTOM_FLEXBOX_THEME },
             react_1.default.createElement(PrimaryButton_1.default, { theme: BUTTON_THEME }, "Open"))));
 };

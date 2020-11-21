@@ -5,5 +5,5 @@ export default styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 2em;
+    margin-top: 5em;
 `

@@ -81,18 +81,20 @@ var BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.navy,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em',
-    marginTop: '1em'
+    marginTop: '1em',
+    boxShadow: '1px 1px 5px black'
 };
 var GUEST_BUTTON_THEME = {
     color: theme_1.default.colors.navy,
     backgroundColor: theme_1.default.colors.white,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 10px navy',
     borderRadius: '1em',
-    marginTop: '1em'
+    marginTop: '1em',
+    boxShadow: '1px 1px 5px black'
 };
 var AuthPage = function (props) {
     var _a = react_1.useState(true), login = _a[0], setLogin = _a[1];
@@ -107,7 +109,7 @@ var AuthPage = function (props) {
     if (login) {
         return (react_1.default.createElement(AuthPageDiv_1.default, null,
             react_1.default.createElement(FormDiv_1.default, null,
-                react_1.default.createElement(FlexBox_1.default, { theme: LEFT_FLEXBOX_THEME, style: { fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%' } }, "Login"),
+                react_1.default.createElement(FlexBox_1.default, { theme: LEFT_FLEXBOX_THEME, style: { fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%', zIndex: 3 } }, "Login"),
                 react_1.default.createElement(GridBox_1.default, { theme: LOGIN_RIGHT_GRIDBOX_THEME },
                     react_1.default.createElement(ErrorField_1.default, { style: { visibility: props.error ? 'visible' : 'hidden' } }, props.error),
                     react_1.default.createElement(FlexBox_1.default, { theme: RIGHT_FLEXBOX_THEME },
@@ -116,7 +118,7 @@ var AuthPage = function (props) {
                         react_1.default.createElement(FlexBox_1.default, { theme: { flexDirection: theme_1.default.flexDirection.row } },
                             react_1.default.createElement(PrimaryButton_1.default, { theme: BUTTON_THEME, onClick: function () { return props.authenticateUser({ username: username, password: password }); } }, "Login"),
                             react_1.default.createElement(PrimaryButton_1.default, { theme: GUEST_BUTTON_THEME, style: { marginLeft: '1em' }, onClick: function () { return props.authenticateUser({ username: 'Guest', password: 'guest' }); } }, "Login as Guest")),
-                        react_1.default.createElement("div", { style: { marginTop: '1em' } },
+                        react_1.default.createElement("div", { style: { marginTop: '1em', zIndex: 3, cursor: 'pointer' } },
                             "Don't have an account? ",
                             react_1.default.createElement("a", { style: SWITCH_BUTTON_STYLE, onClick: function () { return setLogin(false); } }, "SignUp"),
                             " now!"))))));
@@ -124,7 +126,7 @@ var AuthPage = function (props) {
     else {
         return (react_1.default.createElement(AuthPageDiv_1.default, null,
             react_1.default.createElement(FormDiv_1.default, null,
-                react_1.default.createElement(FlexBox_1.default, { theme: LEFT_FLEXBOX_THEME, style: { fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%' } }, "Sign Up"),
+                react_1.default.createElement(FlexBox_1.default, { theme: LEFT_FLEXBOX_THEME, style: { fontSize: '4em', color: 'navy', borderRight: '2px solid navy', height: '100%', zIndex: 3 } }, "Sign Up"),
                 react_1.default.createElement(GridBox_1.default, { theme: SIGNUP_RIGHT_GRIDBOX_THEME },
                     react_1.default.createElement(ErrorField_1.default, { style: { visibility: props.error ? 'visible' : 'hidden' } }, props.error),
                     react_1.default.createElement(FlexBox_1.default, { theme: RIGHT_FLEXBOX_THEME },
@@ -132,7 +134,7 @@ var AuthPage = function (props) {
                         react_1.default.createElement(FormInput_1.default, { type: SIGNUP_FIELDS[1].type, value: password, placeholder: SIGNUP_FIELDS[1].label, onChange: function (e) { return setPassword(e.target.value); } }),
                         react_1.default.createElement(FormInput_1.default, { type: SIGNUP_FIELDS[2].type, value: confirmPassword, placeholder: SIGNUP_FIELDS[2].label, onChange: function (e) { return setConfirmPassword(e.target.value); }, onBlur: function () { return props.error.length > 0 ? null : props.validatePasswords({ password: password, confirmPassword: confirmPassword }); } }),
                         react_1.default.createElement(PrimaryButton_1.default, { theme: BUTTON_THEME, onClick: function () { return props.error.length > 0 ? null : props.registerUser({ username: username, password: password, confirmPassword: confirmPassword }); } }, "SignUp"),
-                        react_1.default.createElement("div", { style: { marginTop: '1em' } },
+                        react_1.default.createElement("div", { style: { marginTop: '1em', zIndex: 3, cursor: 'pointer' } },
                             "Do you have an account? ",
                             react_1.default.createElement("a", { style: SWITCH_BUTTON_STYLE, onClick: function () { return setLogin(true); } }, "Log In"),
                             " now!"))))));

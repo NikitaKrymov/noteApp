@@ -25,7 +25,14 @@ var INITIAL_STATE = {
     notebookTasks: [],
     isTaskLoading: true,
     isNotebookLoading: true,
-    isUserLoading: true
+    isUserLoading: true,
+    currentNotebook: {
+        title: '',
+        description: '',
+        _id: '',
+        closedStatus: false,
+        owner: ''
+    }
 };
 exports.default = (function (state, action) {
     if (state === void 0) { state = INITIAL_STATE; }
@@ -37,11 +44,19 @@ exports.default = (function (state, action) {
         case TaskActionTypes_1.FETCH_TASKS_SUCCESS:
             return __assign(__assign({}, state), { notebookTasks: lodash_1.default.mapKeys(action.payload, 'index'), isTaskLoading: false });
         case AuthActionTypes_1.LOG_OUT_USER_SUCCESS:
-            return __assign(__assign({}, state), { authStatus: false });
+            return __assign(__assign({}, state), { authStatus: false, isTaskLoading: true, isNotebookLoading: true, isUserLoading: true, isInitialTaskLoading: true });
         case AuthActionTypes_1.FETCH_USER_FAILED:
             return __assign(__assign({}, state), { isUserLoading: false });
         case NotebookActionTypes_1.DELETE_NOTEBOOK_SUCCESS:
             return __assign(__assign({}, state), { isNotebookLoading: true });
+        case TaskActionTypes_1.FETCH_TASKS_REQUEST:
+            return __assign(__assign({}, state), { isTaskLoading: true });
+        case NotebookActionTypes_1.FETCH_NOTEBOOKS_REQUEST:
+            return __assign(__assign({}, state), { isNotebookLoading: true });
+        case NotebookActionTypes_1.FETCH_NOTEBOOK_REQUEST:
+            return __assign(__assign({}, state), { isNotebookLoading: true, notebookTasks: [] });
+        case NotebookActionTypes_1.FETCH_NOTEBOOK_SUCCESS:
+            return __assign(__assign({}, state), { currentNotebook: { _id: action.payload._id, title: action.payload.title, description: action.payload.description, owner: action.payload.owner, closedStatus: action.payload.closedStatus }, isNotebookLoading: false });
         default:
             return state;
     }

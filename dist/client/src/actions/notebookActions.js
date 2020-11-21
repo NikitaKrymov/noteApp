@@ -38,16 +38,16 @@ exports.fetchNotebookFailed = function (error) { return ({
     type: NotebookActionTypes_1.FETCH_NOTEBOOK_FAILED,
     payload: error
 }); };
-exports.editNotebookRequest = function (notebookId, notebookData) { return ({
+exports.editNotebookRequest = function (title, description, notebookId) { return ({
     type: NotebookActionTypes_1.EDIT_NOTEBOOK_REQUEST,
     payload: {
-        notebookId: notebookId,
-        notebookData: notebookData
+        title: title,
+        description: description,
+        notebookId: notebookId
     }
 }); };
-exports.editNotebookSuccess = function (notebook) { return ({
-    type: NotebookActionTypes_1.EDIT_NOTEBOOK_SUCCESS,
-    payload: notebook
+exports.editNotebookSuccess = function () { return ({
+    type: NotebookActionTypes_1.EDIT_NOTEBOOK_SUCCESS
 }); };
 exports.editNotebookFailed = function (error) { return ({
     type: NotebookActionTypes_1.EDIT_NOTEBOOK_FAILED,

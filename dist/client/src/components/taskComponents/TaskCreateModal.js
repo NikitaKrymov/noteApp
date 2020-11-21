@@ -23,10 +23,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
-var FormInput_1 = __importDefault(require("../../elements/authElements/FormInput"));
 var FlexBox_1 = __importDefault(require("../../elements/FlexBox"));
 var ModalDiv_1 = __importDefault(require("../../elements/ModalDiv"));
 var PrimaryButton_1 = __importDefault(require("../../elements/PrimaryButton"));
+var TextArea_1 = __importDefault(require("../../elements/TextArea"));
 var theme_1 = __importDefault(require("../../theme"));
 var TOP_FLEXBOX_THEME = {
     justifyContent: theme_1.default.justifyContent.center,
@@ -54,7 +54,7 @@ var CANCEL_BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.white,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -65,7 +65,7 @@ var SUBMIT_BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.navy,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -83,7 +83,7 @@ var TaskModal = function (props) {
         react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME, style: { color: 'navy', fontSize: '1.5em', borderBottom: '1px solid navy' } }, "Add New Task"),
         react_1.default.createElement(FlexBox_1.default, { theme: ERROR_FLEXBOX_THEME, style: { opacity: subjectError ? '1' : '0', color: 'red', border: '1px solid red', margin: '1em', padding: '1em' } }, "Subject field can not be empty!"),
         react_1.default.createElement(FlexBox_1.default, { theme: MID_FLEXBOX_THEME },
-            react_1.default.createElement(FormInput_1.default, { type: FORM_FIELDS[0].type, placeholder: FORM_FIELDS[0].label, value: subject, onChange: function (e) { return setSubject(e.target.value); }, style: {
+            react_1.default.createElement(TextArea_1.default, { placeholder: FORM_FIELDS[0].label, value: subject, onChange: function (e) { return setSubject(e.target.value); }, style: {
                     height: '100%',
                     border: '1px solid navy',
                     borderRadius: '1em'

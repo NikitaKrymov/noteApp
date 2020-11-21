@@ -59,7 +59,7 @@ var CANCEL_BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.white,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginRight: '1em',
@@ -70,7 +70,7 @@ var SUBMIT_BUTTON_THEME = {
     backgroundColor: theme_1.default.colors.navy,
     hoverColor: theme_1.default.colors.navy,
     hoverBackgroundColor: theme_1.default.colors.white,
-    hoverBoxShadow: '0 0 3px navy',
+    hoverBoxShadow: '0 0 5px navy',
     borderRadius: '1em',
     marginTop: '1em',
     marginLeft: '1em',
@@ -85,8 +85,8 @@ var NotebookCreateModal = function (props) {
     var _b = react_1.useState(props.description), description = _b[0], setDescription = _b[1];
     var _c = react_1.useState(false), titleError = _c[0], setTitleError = _c[1];
     var notebookId = props.notebookId;
-    var userId = props.userId;
-    return (react_1.default.createElement(ModalDiv_1.default, { style: { top: '20%', gridTemplateRows: '2fr 2fr 8fr 1fr' } },
+    console.log(notebookId);
+    return (react_1.default.createElement(ModalDiv_1.default, { style: { gridTemplateRows: '2fr 2fr 8fr 1fr' } },
         react_1.default.createElement(FlexBox_1.default, { theme: TOP_FLEXBOX_THEME, style: { color: 'navy', fontSize: '1.5em', borderBottom: '1px solid navy' } }, props.modalMame),
         react_1.default.createElement(FlexBox_1.default, { theme: ERROR_FLEXBOX_THEME, style: { opacity: titleError ? '1' : '0', color: 'red', border: '1px solid red', margin: '1em', padding: '1em' } }, "Title field can not be empty!"),
         react_1.default.createElement(FlexBox_1.default, { theme: MID_FLEXBOX_THEME },
@@ -94,7 +94,7 @@ var NotebookCreateModal = function (props) {
             react_1.default.createElement(FormInput_1.default, { type: FORM_FIELDS[1].type, placeholder: FORM_FIELDS[1].label, value: description, onChange: function (e) { return setDescription(e.target.value); } })),
         react_1.default.createElement(FlexBox_1.default, { theme: BOTTOM_FLEXBOX_THEME },
             react_1.default.createElement(PrimaryButton_1.default, { theme: CANCEL_BUTTON_THEME, onClick: function () { return props.closeModal(false); } }, "Cancel"),
-            react_1.default.createElement(PrimaryButton_1.default, { theme: SUBMIT_BUTTON_THEME, onClick: function () { props.closeModal(false); title.length > 0 ? props.saveNotebook(notebookId, { title: title, description: description, owner: userId }) : setTitleError(true); } }, "Save"))));
+            react_1.default.createElement(PrimaryButton_1.default, { theme: SUBMIT_BUTTON_THEME, onClick: function () { props.closeModal(false); title.length > 0 ? props.saveNotebook(title, description, notebookId) : setTitleError(true); } }, "Save"))));
 };
 exports.default = NotebookCreateModal;
 //# sourceMappingURL=NotebookEditModal.js.map
