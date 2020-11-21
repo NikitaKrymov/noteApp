@@ -11,8 +11,9 @@ import FlexBox from '../../elements/FlexBox';
 import theme from '../../theme';
 
 const TASKLIST_FLEXBOX_THEME = {
-    justifyContent: theme.justifyContent.flexStart,
+    justifyContent: theme.justifyContent.center,
     flexDirection: theme.flexDirection.row,
+    alignItems: theme.alignItems.flexStart,
     flexWrap: theme.flexWrap.wrap
 }
 
@@ -29,7 +30,6 @@ const WebPlannerDashboard: React.FC<Props> = (props) => {
             </LoadingPage>
         );       
     } else {
-        console.log(props.notebooks)
         return(
             <DashboardDiv>
                 <FlexBox theme={TASKLIST_FLEXBOX_THEME} style={{ width: '66em' }}>

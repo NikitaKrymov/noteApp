@@ -47,7 +47,7 @@ var App = function (props) {
                 react_1.default.createElement(GlobalStyle_1.default, null),
                 react_1.default.createElement("div", { style: { position: 'relative', height: '3em' } },
                     react_1.default.createElement(Header_1.default, { authStatus: props.authStatus })),
-                react_1.default.createElement("div", { style: { position: 'relative' } }, routes)));
+                react_1.default.createElement("div", { style: { position: 'relative', minHeight: '100vh' } }, routes)));
         }
         else {
             return (react_1.default.createElement("div", { style: { position: 'relative', width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' } },

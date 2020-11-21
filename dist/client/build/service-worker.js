@@ -1,6 +1,6 @@
 "use strict";
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
-importScripts("/precache-manifest.f8e71b01237d03cd0be17969565c7510.js");
+importScripts("/precache-manifest.05b5a8063a1bc61b8c9a176243696674.js");
 self.addEventListener('message', function (event) {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();
