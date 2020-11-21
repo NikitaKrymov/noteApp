@@ -10,9 +10,9 @@ app.use(cookieParser());
 require('./routes/index')(app, mongoDBClient);
 if (process.env.NODE_ENV === 'production') {
     var path_1 = require('path');
-    app.use(express.static('..client/public'));
+    app.use(express.static('client/build'));
     app.get('*', function (req, res) {
-        res.sendFile(path_1.resolve(__dirname, 'index.html'));
+        res.sendFile(path_1.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
 var PORT = process.env.PORT || 6000;

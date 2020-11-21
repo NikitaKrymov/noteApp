@@ -15,7 +15,7 @@ require('./routes/index')(app, mongoDBClient);
 
 if (process.env.NODE_ENV === 'production') {
     const path = require('path');
-    app.use(express.static('../client/public'));    
+    app.use(express.static('client/build'));    
     app.get('*', (req: any, res: any) => {
         res.sendFile(path.join(__dirname, 'index.html'));
     });
