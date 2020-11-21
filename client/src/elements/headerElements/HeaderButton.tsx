@@ -9,13 +9,14 @@ export default styled.div`
     align-items: center;
     font-size: 1.5em;
     padding: 0.5em 2em 0.5em 2em;
+    transition: 0.1s;
     :hover {
-        background: white;
-        color: navy;
+        color: white;
         cursor: pointer;
         font-size: ${props => props.theme.hoverFontSize};
         text-decoration: ${props => props.theme.hoverTextDecoration};
-        box-shadow: 0 0 10px navy;
-        border-radius: 1em;
+        box-shadow: 0 0 5px black;
+        border-radius: 0.5em;
+        transition: 0.1s;
     }
 `
