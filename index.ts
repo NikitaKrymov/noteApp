@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const mongoDBClient = require('./utils/mongoDB')();
-
+console.log(mongoDBClient);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 3002;
 
 app.get('/', (req: any, res: any) => {
     res.send('App is on')
