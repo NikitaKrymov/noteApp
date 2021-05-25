@@ -71,10 +71,9 @@ const BUTTON_THEME = {
     backgroundColor: theme.colors.navy,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 10px navy',
+    hoverBoxShadow: '0 0 5px grey',
     borderRadius: '1em',
     marginTop: '1em',
-    boxShadow: '1px 1px 5px black'
 }
 
 const GUEST_BUTTON_THEME = {
@@ -82,10 +81,9 @@ const GUEST_BUTTON_THEME = {
     backgroundColor: theme.colors.white,
     hoverColor: theme.colors.navy,
     hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 10px navy',
+    hoverBoxShadow: '0 0 5px grey',
     borderRadius: '1em',
     marginTop: '1em',
-    boxShadow: '1px 1px 5px black'
 }
 
 type Props = MapDispatchToProps & MapStateToProps;

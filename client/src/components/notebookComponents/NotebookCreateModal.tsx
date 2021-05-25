@@ -80,7 +80,7 @@ const NotebookCreateModal: React.FC<Props> = (props) => {
     console.log(userId)
     return(
         <ModalDiv style={{ gridTemplateRows: '2fr 2fr 8fr 1fr' }}>
-            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ color: 'navy', fontSize: '1.5em', borderBottom: '1px solid navy'}}>
+            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ color: 'navy', fontSize: '1.2em', borderBottom: '1px solid navy', padding: '0.5em 0 0.5em 0'}}>
                 Open New Notebook
             </FlexBox>
             <FlexBox theme={ERROR_FLEXBOX_THEME} style={{ opacity: titleError ? '1' : '0', color: 'red', border: '1px solid red', margin: '1em', padding: '1em'}}>

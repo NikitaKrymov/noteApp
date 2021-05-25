@@ -15,8 +15,8 @@ const TOP_FLEXBOX_THEME = {
 
 const MID_FLEXBOX_THEME = {
     justifyContent: theme.justifyContent.center,
-    alignItems: theme.alignItems.center,
-    margin: '1em'
+    alignItems: theme.alignItems.flexStart,
+    margin: '2em'
 }
 
 const BOTTOM_FLEXBOX_THEME = {
@@ -26,11 +26,12 @@ const BOTTOM_FLEXBOX_THEME = {
 
 const BUTTON_THEME = {
     color: theme.colors.white,
-    backgroundColor: theme.colors.navy,
-    hoverColor: theme.colors.navy,
-    hoverBackgroundColor: theme.colors.white,
-    hoverBoxShadow: '0 0 10px navy',
-    borderRadius: '1em'
+    //backgroundColor: 'linear-gradient(-45deg, #e73c7e, #23a6d5)',
+    hoverColor: theme.colors.white,
+    hoverBoxShadow: '0 0 5px black',
+    borderRadius: '0.2em',
+    boxShadow: '0 0 5px black',
+    hoverBorderRadius: '0.5em',
 }
 
 interface Props {
@@ -42,14 +43,16 @@ const NotebookComponent: React.FC<Props> = (props) => {
         <DashboardElementDiv 
             onClick={() => history.push(`/${props.notebook._id}`)}
         >
-            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ fontSize: '1.5em', borderBottom: '1px solid navy', zIndex: 3 }}>
-                {props.notebook.title}
+            <FlexBox theme={TOP_FLEXBOX_THEME} style={{ fontSize: '1.2em', borderBottom: '1px solid grey', zIndex: 3 }}>
+                <div style={{ margin: '0 1em 0 1em', }}>
+                    {props.notebook.title}
+                </div>
             </FlexBox>
-            <FlexBox theme={MID_FLEXBOX_THEME} style={{ zIndex: 3 }}>
+            <FlexBox theme={MID_FLEXBOX_THEME} style={{ maxWidth: '18em', zIndex: 3 }}>
                 {props.notebook.description}
             </FlexBox>
             <FlexBox theme={BOTTOM_FLEXBOX_THEME}>
-                <PrimaryButton theme={BUTTON_THEME}>
+                <PrimaryButton theme={BUTTON_THEME} className="buttonGradient" style={{ marginBottom: '1.2em'}}>
                     Open
                 </PrimaryButton>
             </FlexBox>
