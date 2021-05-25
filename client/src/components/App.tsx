@@ -36,7 +36,7 @@ const App: React.FC<Props> = (props) => {
                             <div style={{ position: 'relative', height: '3em' }}>
                                 <Header authStatus={props.authStatus}/>
                             </div>
-                            <div style={{ position: 'relative', minHeight: '100vh' }}>
+                            <div style={{ minHeight: '100vh' }}>
                                 {routes}
                             </div>
                     </div>

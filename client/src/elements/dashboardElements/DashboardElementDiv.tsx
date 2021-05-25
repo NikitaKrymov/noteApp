@@ -5,15 +5,14 @@ export default styled.div`
     width: 20em;
     margin: 1em;
     height: 20em;
-    box-shadow: 0 0 5px black;
     border-radius: 0.5em;
     grid-template-rows: 1fr 3fr 1fr;
     position: relative;
     transition: 0.2s;
+    box-shadow: 0 2px 2px grey;
     :hover {
-        transform: translateY(-0.2em);
+        //transform: translateY(-0.2em);
         cursor: pointer;
-        box-shadow: 0 0 10px navy;
     }
     background: inherit;
     :after{
@@ -21,9 +20,9 @@ export default styled.div`
         width: 100%;
         height: 100%;
         background: white;
-        opacity: 0.5;
+        opacity: 1;
         position: absolute;
-        border-radius: 0.5em;
+        border-radius: 0.2em;
         z-index: 2;
     }
 `

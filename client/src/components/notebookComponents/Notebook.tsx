@@ -16,6 +16,7 @@ import DeleteIcon from '../../elements/DeleteIcon';
 import Modal from '../notebookComponents/NotebookDeleteModal';
 import '../../css/main.css';
 import LoadingPage from '../../elements/LoadingPage';
+import { callbackify } from 'util';
 
 const TOP_FLEXBOX_THEME = {
     justifyContent: theme.justifyContent.sb
@@ -90,13 +91,11 @@ const NotebookComponent:React.FC <Props> = (props) => {
         console.log(props.notebookData)
         return(
             <FlexBox style={{ 
-                    position: 'relative',
                     display: 'flex', 
                     justifyContent: 'center', 
                     alignItems: 'center',
-                    height: '100vh',
-                    width: '100%'
-
+                    width: '100%',
+                    padding: '3em 0 1em 0'
                 }} className="noScroll" >
                     {deleteModal ? <Modal closeModal={setDeleteModal} action={props.deleteNotebook} object={props.notebookData} /> : null }
                     {editMode ? <NotebookEditModal modalMame='Edit Notebook' closeModal={setEditMode} notebookId={props.notebookData._id} title={props.notebookData.title} userId={props.notebookData.owner} description={props.notebookData.description} saveNotebook={props.editNotebook} /> : null }
